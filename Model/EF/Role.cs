@@ -6,21 +6,20 @@ namespace Model.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Quyen")]
-    public partial class Quyen
+    public partial class Role
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Quyen()
+        public Role()
         {
-            TaiKhoans = new HashSet<TaiKhoan>();
+            Customers = new HashSet<Customer>();
         }
 
-        public int QuyenId { get; set; }
+        public int RoleId { get; set; }
 
-        [StringLength(50)]
-        public string TenQuyen { get; set; }
+        [StringLength(200)]
+        public string RoleName { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TaiKhoan> TaiKhoans { get; set; }
+        public virtual ICollection<Customer> Customers { get; set; }
     }
 }

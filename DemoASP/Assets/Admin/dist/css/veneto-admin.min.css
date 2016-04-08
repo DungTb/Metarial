@@ -1938,10 +1938,7 @@ h1.panel-title, h2.panel-title, h3.panel-title {
 .panel-default {
     border-color: #ddd;
 }
-.filter-container>.btn-group-filter {
-    width: 100%;
-    display: inline-block;
-}
+
 .panel-default>.panel-heading, .panel-default>form>.panel-heading {
     color: #333;
     background-color: #f5f5f5;

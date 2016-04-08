@@ -3,37 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Model.EF;
 using Model.Dao;
-using Model.ViewModel;
 namespace DemoASP.Areas.Admin.Controllers
 {
-    public class DonHangController : Controller
+    public class CategoryController : Controller
     {
-        // GET: Admin/DonHang
+        // GET: Admin/Category
         public ActionResult Index()
         {
-            var dao = new DonHangDao();
+            var dao = new CategoryDao();
             var model = dao.ListAll();
-            
             return View(model);
-
-           
         }
 
-        // GET: Admin/DonHang/Details/5
+        // GET: Admin/Category/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Admin/DonHang/Create
+        // GET: Admin/Category/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/DonHang/Create
+        // POST: Admin/Category/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -49,13 +44,13 @@ namespace DemoASP.Areas.Admin.Controllers
             }
         }
 
-        // GET: Admin/DonHang/Edit/5
+        // GET: Admin/Category/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Admin/DonHang/Edit/5
+        // POST: Admin/Category/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -71,13 +66,13 @@ namespace DemoASP.Areas.Admin.Controllers
             }
         }
 
-        // GET: Admin/DonHang/Delete/5
+        // GET: Admin/Category/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Admin/DonHang/Delete/5
+        // POST: Admin/Category/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
