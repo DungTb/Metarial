@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Model.Dao;
 namespace DemoASP.Areas.Admin.Controllers
 {
-    public class CategoryController : Controller
+    [Authorize(Roles = "supperadmin")]    public class CategoryController : Controller
     {
         // GET: Admin/Category
         public ActionResult Index()

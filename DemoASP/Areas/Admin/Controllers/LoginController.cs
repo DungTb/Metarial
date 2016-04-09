@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace DemoASP.Areas.Admin.Controllers
 {
@@ -16,7 +17,13 @@ namespace DemoASP.Areas.Admin.Controllers
         {
             return View();
         }
-        public ActionResult Login(LoginModel model) {
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(DangNhapModel model) {
             if (ModelState.IsValid)
             {
                 var dao = new AdminDao();
@@ -36,14 +43,21 @@ namespace DemoASP.Areas.Admin.Controllers
                 }
                 else if (result == -2)
                 {
-                    ModelState.AddModelError("", "mat Khau Khong Dung");
+                    ModelState.AddModelError("", "Mat Khau Khong Dung");
                 }
                 else
                 {
                     ModelState.AddModelError("", "Dang nhap that bai");
                 }
             }
-            return View("Index");
+            return View("Login");
+        }
+        public ActionResult LogOut()
+        {
+            //Đăng xuất khỏi ứng dụng
+            FormsAuthentication.SignOut();
+            //Về trang chủ
+            return Redirect("/");
         }
     }
 }
