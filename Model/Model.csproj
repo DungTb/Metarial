@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Dao\CategoryDao.cs" />
     <Compile Include="Dao\AdminDao.cs" />
+    <Compile Include="Dao\ProductDao.cs" />
     <Compile Include="EF\Category.cs" />
     <Compile Include="EF\Customer.cs" />
     <Compile Include="EF\DemoASpDbContext1.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="EF\Role.cs" />
     <Compile Include="EF\Store.cs" />
     <Compile Include="ModelView\ModelCategory.cs" />
+    <Compile Include="ModelView\ModelProduct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

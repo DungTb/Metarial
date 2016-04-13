@@ -79,11 +79,8 @@ namespace DemoASP.Controllers
                 var result = dao.Login(model.UserName, model.Password);
                 if (result == 1)
                 {
-                    var user = dao.GetById(model.UserName);
-                    var userSession = new AdminLogin();
-                    userSession.UserName = user.Name;
-                    userSession.UserID = user.Id;
-                    Session.Add(CommonConstants.USER_SESSION, userSession);
+                    FormsAuthentication.SetAuthCookie(model.UserName, false);
+                    
                     return RedirectToAction("Index", "Home");
                 }
                 else if (result == 0)

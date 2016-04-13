@@ -204,7 +204,7 @@
                         </form>
                     </li>
                     <li class >
-                        <a href="#" title="TrangChu">
+                        <a href="http://localhost:59012/Admin/Home/Index" title="TrangChu">
                             <i class="text-muted fa fa-lg fa-fw fa-home"></i> Trang Chủ                              
                             
                         </a>                       
@@ -222,7 +222,7 @@
                         </a>
                                            </li>
                     <li class>
-                        <a href="#" title="DanhMucSanPham">
+                        <a href="http://localhost:59012/Admin/Category/Index" title="DanhMucSanPham">
                             <i class="text-muted fa fa-lg fa-fw fa-tags"></i> Danh Mục Sản Phẩm
                         </a>
 
@@ -502,7 +502,7 @@
             </nav>
         </aside>
         <div class="page-content">
-            @RenderSection("Header", required: true)
+            @RenderSection("Header", required: false)
      
             <div class="container-fluid-md">
                 @RenderBody()
@@ -529,6 +529,7 @@
     <script src="/Assets/Admin/dist/assets/plugins/raphael/raphael-min.js"></script>
     <script src="/Assets/Admin/dist/assets/plugins/morris/morris.min.js"></script>
     <script src="/Assets/Admin/demo/js/dashboard.js"></script>
-
+    <script src="/Assets/Admin/plugins/ckeditor/ckeditor.js"></script>
+    @RenderSection("jsFooter", required: false)
 </body>
 </html>

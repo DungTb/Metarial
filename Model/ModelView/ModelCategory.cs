@@ -10,6 +10,8 @@ namespace Model.ModelView
 {
   public  class ModelCategory
     {
+        public int Id { get; set; }
+        public string Image { get; set; }
         [StringLength(50)]
         public string Name { get; set; }
         [Column(TypeName = "ntext")]

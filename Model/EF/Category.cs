@@ -1,7 +1,8 @@
-namespace Model.EF
+﻿namespace Model.EF
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -17,14 +18,15 @@ namespace Model.EF
         public int Id { get; set; }
 
         [StringLength(50)]
+        [DisplayName("Tên Danh Mục")]
         public string Name { get; set; }
-
+        [DisplayName("Mã Danh Mục")]
         [StringLength(50)]
         public string Code { get; set; }
 
         [StringLength(200)]
         public string Image { get; set; }
-
+        [DisplayName("Mô Tả")]
         [Column(TypeName = "ntext")]
         public string Description { get; set; }
 

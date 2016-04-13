@@ -1,0 +1,119 @@
+﻿@model Model.EF.Category
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+}
+@section Header{
+   <table class="table" style="margin-left:20px">
+    <thead>
+        <tr>
+            <th>  <h2 class="header__main"><span class="breadcrumb"><i class="fa fa-credit-card"></i> </span><span class="title">Danh mục sản phẩm/ Thêm mới danh mục</span></h2></th>
+            <th>
+
+                <a class="btn btn-default" href="javascript:void(0)" bind-event-click="showExportOrders()">Xuất danh sách danh mục</a>
+                <a class="btn btn-primary" href="/Admin/AllCategories/create">Thêm mới</a>
+
+            </th>
+
+        </tr>
+    </thead>
+
+</table>
+
+
+
+
+}
+
+
+@section jsFooter{
+    <script>
+        var editor = CKEDITOR.replace('txtDescription',{
+            customConfig :'/Assets/Admin/plugins/ckeditor/config.js',
+        });    
+    </script>
+    };
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container-fluid-md">
+        <div class="row">
+            <div class="col-md-4 col-lg-3">
+                <h3><span><b>Nội dung danh mục</b></span></h3>
+                <p class="text-muted" id="btn-upload-collection-image">Chọn ảnh đại diện.</p>
+                <input type="file" id="UploadImg" /> <br /><br />
+                Tên: <input type="text" id="txtImg" size="50" style="width:140px" /> <br /><br />
+                <img id="imgPreview" height="200" width="200" style="border:none" />
+
+                <script>
+                    $("#UploadImg").change(function () {
+                        var data = new FormData();
+                        var files = $("#UploadImg").get(0).files;
+                        if (files.length > 0) {
+                            data.append("MyImages", files[0]);
+                        }
+
+                        $.ajax({
+                            url: "/Category/UploadFile",
+                            type: "POST",
+                            processData: false,
+                            contentType: false,
+                            data: data,
+                            success: function (response) {
+                                //code after success
+                                $("#txtImg").val(response);
+                                $("#imgPreview").attr('src', '/Upload/' + response);
+                            },
+                            error: function (er) {
+                                alert(er);
+                            }
+
+                        });
+                    });
+                </script>
+            </div>
+
+            <div class="col-md-8 col-lg-9">
+
+
+                <div class="form-horizontal">    
+                    <form role="form">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" }, id = "txtDescription" })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-10 col-md-10">
+                                <input type="submit" value="Lưu" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </form>
+                 </div>
+            </div>                               
+            </div>
+        </div>   
+}
+
+
