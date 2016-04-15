@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Model.ModelView
 {
-   public class ModelProduct
+    public class ModelProduct
     {
+        public string NameCategory { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
@@ -17,6 +18,7 @@ namespace Model.ModelView
 
         [StringLength(50)]
         public string ProductSpecies { get; set; }
+       // public List<ManufacturerModels> ListManufacturer { get; set; }
 
     }
 }

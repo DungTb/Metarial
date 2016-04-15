@@ -1,7 +1,9 @@
 ﻿<!doctype html>
-
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if IE 9]>         <html class="ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
 <html>
-<!--<![endif]-->
+ <!--<![endif]-->
 <head>
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -180,82 +182,57 @@
     <div class="page-wrapper">
         <aside class="sidebar sidebar-default">
             <div class="sidebar-profile">
-                <a class="navbar-logo" href="#">
-                    <span>
-                        <img src="/assets/images/bizweb-logo.png" title="Bizweb" style="width:100px;">
-                    </span>
-                </a>
-                <a class="view-storefront" href="http://only-one1.bizwebvietnam.net" target="_blank" title="Xem website của bạn">
-                        <i class="fa fa-lg fa-external-link"></i>                    
-                </a>
+                <img class="img-circle profile-image" src="/Assets/Admin/demo/images/profile.jpg">
+                <div class="profile-body">
+                    <h4>Marlon Brice</h4>
+                    <div class="sidebar-user-links">
+                        <a class="btn btn-link btn-xs" href="pages-profile.html" data-placement="bottom" data-toggle="tooltip" data-original-title="Profile"><i class="fa fa-user"></i></a>
+                        <a class="btn btn-link btn-xs" href="javascript:;" data-placement="bottom" data-toggle="tooltip" data-original-title="Messages"><i class="fa fa-envelope"></i></a>
+                        <a class="btn btn-link btn-xs" href="javascript:;" data-placement="bottom" data-toggle="tooltip" data-original-title="Settings"><i class="fa fa-cog"></i></a>
+                        <a class="btn btn-link btn-xs" href="pages-sign-in.html" data-placement="bottom" data-toggle="tooltip" data-original-title="Logout"><i class="fa fa-sign-out"></i></a>
+                    </div>
                 </div>
-               
-         
+            </div>
             <nav>
-               
+                <h5 class="sidebar-header">Navigation</h5>
                 <ul class="nav nav-pills nav-stacked">
-
-                    <li class="hidden-xs">
-                        <form action="/admin/products" method="get" novalidate="novalidate">
-                            <div class="navbar-search">
-                                <input type="text" class="form-control" name="query" placeholder="Tìm kiếm …">
-                                <button type="submit" class="btn"><i class="fa fa-search"></i></button>
-                            </div>
-                        </form>
-                    </li>
-                    <li class >
-                        <a href="http://localhost:59012/Admin/Home/Index" title="TrangChu">
-                            <i class="text-muted fa fa-lg fa-fw fa-home"></i> Trang Chủ                              
-                            
-                        </a>                       
-                    </li>
-                    <li class ="active open">
-                        <a href="#" title="DonHang">
-                            <i class="text-muted fa fa-lg fa-fw fa-credit-card"></i> Đơn Hàng
+                    <li class="nav-dropdown active open">
+                        <a href="/Admin/Home/Index" title="Dashboards">
+                            <i class="fa fa-lg fa-fw fa-home"></i> Trang Chủ
                         </a>
                        
                     </li>
-                    <li class>
-                        <a href="#" title="SanPham">
-                            <i class="text-muted fa fa-lg fa-fw fa-tag"></i> Sản Phẩm
-                            
+                    <li class="nav-dropdown">
+                        <a href="#" title="Users">
+                            <i class="fa fa-lg fa-fw fa-user"></i> Đơn Hàng
                         </a>
-                                           </li>
-                    <li class>
-                        <a href="http://localhost:59012/Admin/Category/Index" title="DanhMucSanPham">
-                            <i class="text-muted fa fa-lg fa-fw fa-tags"></i> Danh Mục Sản Phẩm
-                        </a>
-
+                       
                     </li>
-                    <li class>
-                        <a href="#" title="KhachHang">
-                            <i class="text-muted fa fa-lg fa-fw fa-users"></i> Khách Hàng
+                    <li class="nav-dropdown">
+                        <a href="/Admin/Product/Index" title="Users">
+                            <i class="fa fa-lg fa-fw fa-envelope-o"></i> Sản Phẩm
+                            <span class="label label-danger pull-right">New</span>
                         </a>
-
+                      
                     </li>
-                    <li class>
-                        <a href="#" title="Khuyenmai">
-                            <i class="text-muted fa fa-lg fa-fw fa-volume-up"></i> Khuyến Mãi
-
+                    <li class="nav-dropdown">
+                        <a href="/Admin/Category/Index" title="UI Elements">
+                            <i class="fa fa-lg fa-fw fa-suitcase"></i> Danh Mục Sản Phẩm
                         </a>
-                    <li class="separate" style=" color : #fff"></li>  
+                     
+                    </li>
+                    <li class="nav-dropdown">
+                        <a href="#" title="Forms">
+                            <i class="fa fa-lg fa-fw fa-edit"></i> Khách Hàng
+                           
+                        </a>
+                        
                     </li>
                     <li class="nav-dropdown">
                         <a href="#" title="Tables">
-                            <i class="fa fa-lg fa-fw fa-th-list"></i> Tables
+                            <i class="fa fa-lg fa-fw fa-th-list"></i> Cấu Hình
                         </a>
-                        <ul class="nav-sub">
-                            <li>
-                                <a href="tables-basic-tables.html" title="Basic Tables">
-                                    <i class="fa fa-fw fa-caret-right"></i> Basic Tables
-                                </a>
-                            </li>
-                            <li>
-                                <a href="tables-data-tables.html" title="Data Tables">
-                                    <i class="fa fa-fw fa-caret-right"></i> Data Tables
-                                </a>
-                            </li>
-                        </ul>
+                        
                     </li>
                     <li class="nav-dropdown">
                         <a href="#" title="Charts">
@@ -449,7 +426,6 @@
                 </ul>
                 <h5 class="sidebar-header">Labels</h5>
                 <ul class="nav nav-pills nav-stacked">
-
                     <li>
                         <a href="javascript:;">
                             <i class="fa fa-fw fa-circle text-danger"></i>
@@ -502,10 +478,11 @@
             </nav>
         </aside>
         <div class="page-content">
-            @RenderSection("Header", required: false)
-     
+            <div class="page-subheading page-subheading-md">
+                @RenderSection("Header", required: false)
+            </div>
             <div class="container-fluid-md">
-                @RenderBody()
+                @RenderBody()               
             </div>
         </div>
     </div>

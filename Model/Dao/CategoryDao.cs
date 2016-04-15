@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Model.EF;
 using Model.ModelView;
 using PagedList;
+using System.Data.Entity;
 
 namespace Model.Dao
 {
@@ -18,11 +19,15 @@ namespace Model.Dao
         {
             db = new DemoASpDbContext1();
         }
-        public long Isert(Category entity)
+        public long Isert(Category category)
         {
-            db.Categories.Add(entity);
+            db.Categories.Add(category);
             db.SaveChanges();
-            return entity.Id;
+            return category.Id;
+        }
+        public Category FillId(int ? id)
+        {
+            return db.Categories.Find(id);
         }
         public bool Delete(int id)
         {
@@ -37,6 +42,33 @@ namespace Model.Dao
             {
                 return false;
             }
+        }
+        public long Edit(Category category,string img)
+        {
+            Category savecategory = new Category();
+            savecategory.Id = category.Id;
+            savecategory.Name = category.Name;
+            savecategory.Code = category.Code;
+            savecategory.Description = category.Description;
+            savecategory.Alias = category.Alias;
+            savecategory.Image = img;
+
+            savecategory.Status = category.Status;
+            savecategory.ModifiedOn = category.ModifiedOn;
+
+
+            db.Entry(category).State = EntityState.Modified;
+            db.SaveChanges();
+            return category.Id;
+
+        }
+        public void SaveEditCategory(Category category)
+        {
+
+            db.Entry(category).State = System.Data.Entity.EntityState.Modified;
+
+
+            db.SaveChanges();
         }
         public IEnumerable<ModelCategory> ListAllPaging(string SearchString, int page = 1, int pagesize = 10)
         {

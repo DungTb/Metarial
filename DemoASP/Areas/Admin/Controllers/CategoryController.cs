@@ -20,6 +20,7 @@ namespace DemoASP.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
+        CategoryDao c = new CategoryDao();
         public static string fileimg;
         public DemoASpDbContext1 db = new DemoASpDbContext1();
         // GET: Admin/Category
@@ -65,10 +66,18 @@ namespace DemoASP.Areas.Admin.Controllers
                 savecategory.Alias = category.Alias;
                 savecategory.Image = fileimg;
                 savecategory.CreatedOn = DateTime.Now;
-
-                db.Categories.Add(savecategory);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                long Id = new CategoryDao().Isert(savecategory);           
+                if (Id > 0)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thêm danh mục thất bại");
+                }
+                //db.Categories.Add(savecategory);
+                //db.SaveChanges();
+                //return RedirectToAction("Index");
             }
 
             return View(category);
@@ -117,7 +126,7 @@ namespace DemoASP.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            Category category = new CategoryDao().FillId(id);      
             if (category == null)
             {
                 return HttpNotFound();
@@ -132,20 +141,31 @@ namespace DemoASP.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                Category savecategory = new Category();
+               /* Category savecategory = new Category();
                 savecategory.Id = category.Id;
                 savecategory.Name = category.Name;
                 savecategory.Code = category.Code;
                 savecategory.Description = category.Description;
                 savecategory.Alias = category.Alias;
                 savecategory.Image = fileimg;
-               
+
                 savecategory.Status = category.Status;
                 savecategory.ModifiedOn = category.ModifiedOn;
-
-                db.Entry(savecategory).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                long id = new CategoryDao().Edit(savecategory);*/
+               
+               long id= c.Edit(category, fileimg);
+               // db.Entry(product).State = EntityState.Modified;
+               // db.SaveChanges();
+                if (id > 0)
+                {
+                    return RedirectToAction("Index");
+                }
+               else {
+                    ModelState.AddModelError("", "Sửa danh mục thất bại");
+                }
+                //db.Entry(savecategory).State = EntityState.Modified;
+                //db.SaveChanges();
+                //return RedirectToAction("Index");
             }
             return View(category);
         }
@@ -159,8 +179,9 @@ namespace DemoASP.Areas.Admin.Controllers
             }
 
             //Kiểm tra hợp lệ dữ liệu phía server
-            var category = db.Categories.Find(id);
-
+           // var category = db.Categories.Find(id);
+          // var category = new CategoryDao().FillId(id);
+            Category category = c.FillId(id);
             if (TryUpdateModel(category, "", new string[] { "Name", "Code", "Image", "Description", "Alias", "CreateOn", "ModifiedOn", "Status" }))
             {
                 if (fileimg != category.Image)
@@ -168,10 +189,11 @@ namespace DemoASP.Areas.Admin.Controllers
                     category.Image = fileimg;
                 }
                 //Cập nhật thông tin 
-                db.Entry(category).State = System.Data.Entity.EntityState.Modified;
+                c.SaveEditCategory(category);
+                //db.Entry(category).State = System.Data.Entity.EntityState.Modified;
 
 
-                db.SaveChanges();
+                //db.SaveChanges();
             }
             return RedirectToAction("Index");
         }
@@ -192,14 +214,9 @@ namespace DemoASP.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
-            db.SaveChanges();
+            new CategoryDao().Delete(id);
+            
             return RedirectToAction("Index");
-        }
-        // GET: Admin/Category/Delete/5
-
-        // POST: Admin/Category/Delete/5
-
+        }      
     }
 }

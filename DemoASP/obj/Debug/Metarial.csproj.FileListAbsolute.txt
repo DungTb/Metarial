@@ -84,5 +84,7 @@ C:\Users\LaiVan\Documents\Visual Studio 2015\Projects\DemoASP\DemoASP\bin\Micros
 C:\Users\LaiVan\Documents\Visual Studio 2015\Projects\DemoASP\DemoASP\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\LaiVan\Documents\Visual Studio 2015\Projects\DemoASP\DemoASP\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\LaiVan\Documents\Visual Studio 2015\Projects\DemoASP\DemoASP\obj\Debug\Metarial.csprojResolveAssemblyReference.cache
+C:\Users\LaiVan\Documents\Visual Studio 2015\Projects\DemoASP\DemoASP\obj\Debug\DemoASP.Migrations.Initial.resources
+C:\Users\LaiVan\Documents\Visual Studio 2015\Projects\DemoASP\DemoASP\obj\Debug\Metarial.csproj.GenerateResource.Cache
 C:\Users\LaiVan\Documents\Visual Studio 2015\Projects\DemoASP\DemoASP\obj\Debug\DemoASP.dll
 C:\Users\LaiVan\Documents\Visual Studio 2015\Projects\DemoASP\DemoASP\obj\Debug\DemoASP.pdb

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Model.EF;
+using Model.Dao;
 
 namespace DemoASP.Areas.Admin.Controllers
 {
@@ -15,12 +16,14 @@ namespace DemoASP.Areas.Admin.Controllers
         private DemoASpDbContext1 db = new DemoASpDbContext1();
 
         // GET: Admin/Products
-        public ActionResult Index()
-        {
-            var products = db.Products.Include(p => p.Manufacturer);
-            return View(products.ToList());
-        }
 
+        public ActionResult Index(string SearchString, int page = 1, int pagesize = 10)
+        {
+            var dao = new ProductDao();
+            var model = dao.ListAllPaging(SearchString, page, pagesize);
+            ViewBag.SearchString1 = SearchString;
+            return View(model);
+        }
         // GET: Admin/Products/Details/5
         public ActionResult Details(int? id)
         {

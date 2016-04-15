@@ -2,12 +2,15 @@
 using Model.EF;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
 namespace DemoASP.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         public DemoASpDbContext1 db = new DemoASpDbContext1();
@@ -19,9 +22,10 @@ namespace DemoASP.Areas.Admin.Controllers
             ViewBag.SearchString1 = SearchString;
             return View(model);
         }
-        public void SetViewBag()
+        public void SetViewBag( long ? selectedId = null)
         {
-            ViewBag.Pro
+            var dao = new ProductDao();
+            ViewBag.ProductSpecies = new SelectList(dao.LissAll(), "Name", "ProductSpecies", selectedId);
         }
         // GET: Admin/Product/Details/5
         public ActionResult Details(int id)
@@ -32,87 +36,103 @@ namespace DemoASP.Areas.Admin.Controllers
         // GET: Admin/Product/Create
         public ActionResult Create()
         {
+            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
+            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name");
             return View();
         }
 
         // POST: Admin/Product/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "Id,Code,CategoryId,ManufacturerId,BarCode,Name,ProductSpecies,Size,Unit,Image,Price,SalePrice,StockStatus,AvailableStatus,Alias,CreatedOn,Description,Content1,ModifiedOn")] Product product)
         {
             if (ModelState.IsValid)
             {
-                Product saveproduct = new Product();
-                saveproduct.Id = product.Id;
-                saveproduct.Code = product.Code;
-                saveproduct.CategoryId = product.CategoryId;
-                saveproduct.ManufacturerId = product.ManufacturerId;
-                saveproduct.Name = product.Name;
-                saveproduct.BarCode = product.BarCode;
-                saveproduct.ProductSpecies = product.ProductSpecies;
-                saveproduct.SalePrice = product.SalePrice;
-                saveproduct.Size = product.Size;
-                saveproduct.Price = product.Price;
-                saveproduct.CreatedOn = product.CreatedOn;
-                saveproduct.Unit = product.Unit;
-                saveproduct.Content1 = product.Content1;
-                saveproduct.Description = product.Description;                
-                saveproduct.Image = product.Image;
-                saveproduct.SalePrice = product.SalePrice;
-                saveproduct.AvailableStatus = product.AvailableStatus;
-                saveproduct.Alias = product.Alias;
-                saveproduct.StockStatus = product.StockStatus;
-                db.Products.Add(product);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                long Id = new ProductDao().Isert(product);
+                // db.Products.Add(product);
+                // db.SaveChanges();
+                if (Id > 0)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thêm sản phẩm thất bại");
+                }
+                
             }
-
-            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Code", product.ManufacturerId);
+            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", product.CategoryId);
+            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", product.ManufacturerId);
             return View(product);
         }
 
         // GET: Admin/Product/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = new ProductDao().GetbyId(id);
+          // Product product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name",product.CategoryId);
+            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", product.ManufacturerId);
+            return View(product);
         }
 
         // POST: Admin/Product/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult Edit([Bind(Include = "Id,Code,CategoryId,ManufacturerId,BarCode,Name,ProductSpecies,Size,Unit,Image,Price,SalePrice,StockStatus,AvailableStatus,Alias,CreatedOn,Description,Content1,ModifiedOn")] Product product)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                long id = new ProductDao().Edit(product);
+                //db.Entry(product).State = EntityState.Modified;
+                //db.SaveChanges();
+                if (id > 0) {
+                    return RedirectToAction("Index");
+                }
+                else { ModelState.AddModelError("", "Sửa sản phẩm thất bại"); }
+                
             }
-            catch
-            {
-                return View();
-            }
+            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", product.CategoryId);
+            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", product.ManufacturerId);
+            return View(product);
         }
 
         // GET: Admin/Product/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int ? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = new ProductDao().GetbyId(id);
+           // Product product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
         }
 
         // POST: Admin/Product/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            new ProductDao().Delete(id);
+            //Product product = db.Products.Find(id);
+           // db.Products.Remove(product);
+            //db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

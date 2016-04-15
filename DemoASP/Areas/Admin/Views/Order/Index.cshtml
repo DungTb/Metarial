@@ -1,0 +1,72 @@
+﻿@model PagedList.IPagedList<Model.ModelView.ModelOder>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    <table class="table" style="margin-left:20px">
+        <thead>
+            <tr>
+                <th>  <h2 class="header__main"><span class="breadcrumb"><i class="fa fa-credit-card"></i> </span><span class="title">Danh Sach Don Hang</span></h2></th>
+                <th>
+                    <a class="btn btn-primary" href="/Admin/Product/Create">Thêm mới</a>
+
+                </th>
+
+            </tr>
+        </thead>
+    </table>
+}
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Tất Cả Sản Phẩm </h4>
+            <form class="form-inline" role="form">
+                <button type="submit" class="btn btn-primary"> Tìm Kiếm</button>
+                <input type="text" class="form-control" value="@ViewBag.SearchString1" name="SearchString" placeholder="Nhập từ khóa tìm kiếm...">
+            </form>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="select select-all not-select">
+                            <span><input type="checkbox" class="js-no-dirty all-bulk-action" bind-event-change="addOrRemoveAllBulkActionItems(this)"></span>
+                        </th>
+                        <th > Đơn Hàng</th>
+                        <th width="30%"> Ngày Tạo </th>
+                        <th>Khách Hàng</th>
+                        <th>Trạng Thái Thanh Toán</th>
+                        <th>Trạng Thái Giao Hàng</th>
+                        <th>Thao Tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+            {
+                        <tr>
+                            <td class="select">
+                                <input type="checkbox" bind-event-change="addOrRemoveBulkActionItem(102526,this)" class="bulk-action-item">
+                            </td>                           
+                            <td><a href=""> @item.Code</a> </td>
+                            <td>@item.CreatedOn</td>
+                            <td>@item.Name</td>
+                            <td>@item.Paid</td>
+                            <td>@item.Delivered</td>
+                            <td>@item.TotalPrice</td>
+                            <td>
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @SearchString = @ViewBag.SearchString1 }))
+        </div>
+    </div>
+</div>
+
