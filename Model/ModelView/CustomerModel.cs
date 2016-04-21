@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model.ModelView
 {
- public class ModelAdmin
+ public class CustomerModel
     {
         public bool? Status { get; set; }
         public int Id { get; set; }

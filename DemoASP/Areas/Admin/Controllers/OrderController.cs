@@ -18,7 +18,7 @@ namespace DemoASP.Areas.Admin.Controllers
         // GET: Admin/Order
         public ActionResult Index(string SearchString, int page = 1, int pagesize = 10)
         {
-            var dao = new OderDao();
+            var dao = new OrderDao();
             var model = dao.ListAllPaging(SearchString, page, pagesize);
             ViewBag.SearchString1 = SearchString;
             return View(model);
@@ -31,7 +31,7 @@ namespace DemoASP.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = new OderDao().GetbyId(id);   
+            Order order = new OrderDao().GetbyId(id);   
             if (order == null)
             {
                 return HttpNotFound();
@@ -55,7 +55,7 @@ namespace DemoASP.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                long Id = new OderDao().Isert(order);
+                long Id = new OrderDao().Isert(order);
                
                 if (Id > 0)
                 {
@@ -78,7 +78,7 @@ namespace DemoASP.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = new OderDao().GetbyId(id);
+            Order order = new OrderDao().GetbyId(id);
             if (order == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace DemoASP.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                long id = new OderDao().Edit(order);
+                long id = new OrderDao().Edit(order);
                
                 if (id > 0)
                 {
@@ -128,7 +128,7 @@ namespace DemoASP.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            new OderDao().Delete(id);
+            new OrderDao().Delete(id);
             
             return RedirectToAction("Index");
         }

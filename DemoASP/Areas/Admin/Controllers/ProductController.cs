@@ -18,14 +18,14 @@ namespace DemoASP.Areas.Admin.Controllers
         public ActionResult Index(string SearchString, int page = 1, int pagesize = 10)
         {
             var dao = new ProductDao();
-            var model = dao.ListAllPaging(SearchString, page, pagesize);
+            var model = dao.GetAllPaging(SearchString, page, pagesize);
             ViewBag.SearchString1 = SearchString;
             return View(model);
         }
         public void SetViewBag( long ? selectedId = null)
         {
             var dao = new ProductDao();
-            ViewBag.ProductSpecies = new SelectList(dao.LissAll(), "Name", "ProductSpecies", selectedId);
+            ViewBag.ProductSpecies = new SelectList(dao.GetAll(), "Name", "ProductSpecies", selectedId);
         }
         // GET: Admin/Product/Details/5
         public ActionResult Details(int id)
@@ -49,7 +49,7 @@ namespace DemoASP.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                long Id = new ProductDao().Isert(product);
+                long Id = new ProductDao().Insert(product);
                 // db.Products.Add(product);
                 // db.SaveChanges();
                 if (Id > 0)

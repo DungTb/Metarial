@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model.ModelView
 {
-  public  class ModelOder
+  public  class OrderModel
     {
         public string Paid {
             get {
@@ -30,6 +30,8 @@ namespace Model.ModelView
         }
         public int Id { get; set; }
         public string Code { get; set; }
+        public string Phone { get; set; }
+        public string Adress { get; set; }
         public DateTime? CreatedOn { get; set; }
         public string Name { get; set; }
         public bool? ShippingStatus { get; set; }

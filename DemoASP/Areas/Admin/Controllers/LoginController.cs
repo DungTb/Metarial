@@ -26,7 +26,7 @@ namespace DemoASP.Areas.Admin.Controllers
         public ActionResult Login(DangNhapModel model) {
             if (ModelState.IsValid)
             {
-                var dao = new AdminDao();
+                var dao = new UserDao();
                 var result = dao.Login(model.UserName, model.Password);
                 if (result == 1)
                 {

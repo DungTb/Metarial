@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<Model.ModelView.ModelProduct>
+﻿@model PagedList.IPagedList<Model.ModelView.ProductModel>
 @using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
@@ -52,9 +52,9 @@
                             <td><img class="img-circle" src=@Html.DisplayFor(modelItem => item.Image) height="50" width="50"></td>
                             <td><a href="/Admin/Product/Edit/@item.Id"> @item.Name</a> </td>
                             <td>@item.NameCategory</td>
-                            <td>@item.NameNCC</td>
+                            <td>@item.VendorName</td>
                             <td>
-                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
                             </td>
                         </tr>
                     }

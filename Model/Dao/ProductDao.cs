@@ -24,7 +24,7 @@ namespace Model.Dao
         {
             db = new DemoASpDbContext1();
         }
-        public long Isert(Product product)
+        public long Insert(Product product)
         {
             db.Products.Add(product);
             db.SaveChanges();
@@ -49,26 +49,26 @@ namespace Model.Dao
                 return false;
             }
         }
-        public List<Product> LissAll() {
+        public List<Product> GetAll() {
             return db.Products.ToList();
         }
-        public IEnumerable<ModelProduct> ListAllPaging(string SearchString, int page = 1, int pagesize = 10)
+        public IEnumerable<ProductModel> GetAllPaging(string SearchString, int page = 1, int pagesize = 10)
         {
-            IQueryable<ModelProduct> model = from a in db.Products
+            IQueryable<ProductModel> model = from a in db.Products
                                             join  b in db.Manufacturers
                                             
                                             on a.ManufacturerId equals b.Id 
                                             join c in db.Categories
                                             on b.Id equals c.Id
 
-                                              select new ModelProduct
+                                              select new ProductModel
                                               {
                                                   Id = a.Id,
                                                   NameCategory = c.Name,
                                                   ProductSpecies = a.ProductSpecies,
                                                   Image = a.Image,
                                                   Name = a.Name,
-                                                  NameNCC = b.Name
+                                                  VendorName = b.Name
 
                                               };
             if (!string.IsNullOrEmpty(SearchString))

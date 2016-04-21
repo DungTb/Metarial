@@ -1,0 +1,104 @@
+﻿@model IEnumerable<Model.ModelView.OrderModel>
+
+@{
+    ViewBag.Title = "EditName";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section Header {
+    <table class="table" style="margin-left:20px">
+        <thead>
+            <tr>
+                <th>
+                    <h2 class="header__main">
+                        <span class="breadcrumb"><i class="fa fa-credit-card"></i> </span><span class="title">
+                            Khách Hàng/@foreach (var item in Model)
+                            { @Html.DisplayFor(modelItem => item.Name)
+                                break;
+                            }
+
+                        </span>
+                    </h2>
+                </th>
+
+
+            </tr>
+        </thead>
+
+    </table>
+}
+<div class="container-fluid-md">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Đơn Hàng </h3> <br />
+                </div>
+                <div class="panel-body">
+                    <br />
+
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Đơn Hàng</th>
+                                <th>Ngày Tạo</th>
+                                <th>TT thanh toán</th>
+                                <th>TT giao hàng</th>
+                                <th> Tổng Tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+
+                                    <td>@item.Code</td>
+                                    <td>@item.CreatedOn</td>
+                                    <td>@item.Paid</td>
+                                    <td>@item.Delivered</td>
+                                    <td>@item.TotalPrice</td>
+
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4">
+            <div class="panel panel-default panel-full">
+                <div class="panel-body">
+                    <h3 class="panel-title"> Thông Tin Khách Hàng </h3> <br />  
+                    @foreach (var item in Model)
+                    {
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="">
+                                    <h4>
+                                      Tên khách Hàng :@Html.DisplayFor(modelItem => item.Name)                                      
+                                    </h4>
+                                </div>
+                                
+                                <div> <h4>Số Điện Thoại:@Html.DisplayFor(modelItem => item.Phone)</h4> </div>
+                                <div> <h4> Địa Chỉ @Html.DisplayFor(modelItem => item.Adress) </h4></div>
+                                
+                            </div>
+                        </div>
+                        break;
+                    }
+                   
+
+                   
+                </div>
+
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+       
+

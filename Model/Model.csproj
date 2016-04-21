@@ -60,10 +60,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dao\CategoryDao.cs" />
-    <Compile Include="Dao\AdminDao.cs" />
-    <Compile Include="Dao\OderDao.cs" />
-    <Compile Include="Dao\ProductDao.cs" />
+    <Compile Include="Dao\OrderDetailDao.cs" />
     <Compile Include="Dao\UserDao.cs" />
+    <Compile Include="Dao\OrderDao.cs" />
+    <Compile Include="Dao\ProductDao.cs" />
     <Compile Include="EF\Category.cs" />
     <Compile Include="EF\Customer.cs" />
     <Compile Include="EF\DemoASpDbContext1.cs" />
@@ -74,10 +74,11 @@
     <Compile Include="EF\ProductCategory.cs" />
     <Compile Include="EF\Role.cs" />
     <Compile Include="EF\Store.cs" />
-    <Compile Include="ModelView\ModelAdmin.cs" />
-    <Compile Include="ModelView\ModelCategory.cs" />
-    <Compile Include="ModelView\ModelOder.cs" />
-    <Compile Include="ModelView\ModelProduct.cs" />
+    <Compile Include="ModelView\CustomerModel.cs" />
+    <Compile Include="ModelView\CategoryModel.cs" />
+    <Compile Include="ModelView\OrderDetailModel.cs" />
+    <Compile Include="ModelView\OrderModel.cs" />
+    <Compile Include="ModelView\ProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

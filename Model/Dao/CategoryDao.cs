@@ -70,11 +70,11 @@ namespace Model.Dao
 
             db.SaveChanges();
         }
-        public IEnumerable<ModelCategory> ListAllPaging(string SearchString, int page = 1, int pagesize = 10)
+        public IEnumerable<CategoryModel> ListAllPaging(string SearchString, int page = 1, int pagesize = 10)
         {
-            IQueryable<ModelCategory> model = from a in db.Categories
+            IQueryable<CategoryModel> model = from a in db.Categories
                                       
-                                         select new  ModelCategory
+                                         select new  CategoryModel
                                          {
                                             Id = a.Id,
                                             Image= a.Image,
@@ -89,7 +89,7 @@ namespace Model.Dao
 
 
                                          
-            return model.OrderByDescending(x => x.Name).ToPagedList(page, pagesize);
+            return model.OrderByDescending(x => x.Name).ToPagedList( page, pagesize);
         }
         }
 }

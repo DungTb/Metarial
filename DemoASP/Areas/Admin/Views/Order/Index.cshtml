@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<Model.ModelView.ModelOder>
+﻿@model PagedList.IPagedList<Model.ModelView.OrderModel>
 @using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
@@ -50,7 +50,7 @@
                             <td class="select">
                                 <input type="checkbox" bind-event-change="addOrRemoveBulkActionItem(102526,this)" class="bulk-action-item">
                             </td>                           
-                            <td><a href=""> @item.Code</a> </td>
+                            <td><a href="Admin/User/Edit/@item.Id"> @item.Code</a> </td>
                             <td>@item.CreatedOn</td>
                             <td>@item.Name</td>
                             <td>@item.Paid</td>

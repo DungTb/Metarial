@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Model.ModelView
 {
-  public  class ModelCategory
+  public  class CategoryModel
     {
         public int Id { get; set; }
         public string Image { get; set; }

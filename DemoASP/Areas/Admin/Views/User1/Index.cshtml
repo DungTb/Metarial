@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<Model.ModelView.ModelAdmin>
+﻿@model IEnumerable<Model.ModelView.CustomerModel>
 @using PagedList.Mvc;
 
 @{
@@ -37,12 +37,11 @@
                         <th class="select select-all not-select">
                             <span><input type="checkbox" class="js-no-dirty all-bulk-action" bind-event-change="addOrRemoveAllBulkActionItems(this)"></span>
                         </th>
-                        <th > Họ Tên</th>
+                        <th> Họ Tên</th>
                         <th width="30%"> Email </th>
                         <th>Đơn Hàng</th>
                         <th>Đơn Hàng Gần Nhất</th>
-                        <th>Tổng chi Tiêu</th>
-                        <th>Thao Tác</th>
+                        <th>Tổng chi Tiêu</th>                       
                     </tr>
                 </thead>
                 <tbody>
@@ -51,22 +50,19 @@
                         <tr>
                             <td class="select">
                                 <input type="checkbox" bind-event-change="addOrRemoveBulkActionItem(102526,this)" class="bulk-action-item">
-                            </td>                         
-                            <td><a href="/Admin/Product/Edit/@item.Id"> @item.Name</a> </td>
+                            </td>
+                            <td>@Html.ActionLink(item.Name, "EditName", new { id = item.Id }) </td>
                             <td>@item.EmailCustomer</td>
                             <td>@item.CountOders</td>
-                            <td>@item.CreatedOn</td>
-                            <td>@item.Total</td>
-                            <td>
-                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                            </td>
+                            <td>@item.Code</td>
+                            <td>@item.Total</td>                            
                         </tr>
                     }
 
 
                 </tbody>
             </table>
-            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @SearchString = @ViewBag.SearchString1 }))
+            @* @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @SearchString = @ViewBag.SearchString1 }))*@
         </div>
     </div>
 </div>
