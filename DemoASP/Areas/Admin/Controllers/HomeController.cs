@@ -10,6 +10,7 @@ namespace DemoASP.Areas.Admin.Controllers
     public class HomeController : Controller
     {
         // GET: Admin/Home
+        [Route("home")]
         public ActionResult Index()
         {
             return View();

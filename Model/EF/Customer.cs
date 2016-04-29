@@ -18,15 +18,19 @@ namespace Model.EF
         public int Id { get; set; }
 
         [StringLength(50)]
+        [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
         [StringLength(200)]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
+        [Required(ErrorMessage = "Email is required")]
         public string Email { get; set; }
 
         [StringLength(200)]
         public string Address { get; set; }
 
         [StringLength(50)]
+        [Required(ErrorMessage = "Phone is required")]
         public string Phonenumber { get; set; }
 
         [StringLength(50)]

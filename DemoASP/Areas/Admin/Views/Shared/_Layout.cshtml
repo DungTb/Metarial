@@ -203,7 +203,7 @@
                        
                     </li>
                     <li class="nav-dropdown">
-                        <a href="#" title="Users">
+                        <a href="/Admin/Order/Index" title="Users">
                             <i class="fa fa-lg fa-fw fa-user"></i> Đơn Hàng
                         </a>
                        
@@ -222,7 +222,7 @@
                      
                     </li>
                     <li class="nav-dropdown">
-                        <a href="#" title="Forms">
+                        <a href="/Admin/User1/Index" title="Forms">
                             <i class="fa fa-lg fa-fw fa-edit"></i> Khách Hàng
                            
                         </a>
@@ -487,6 +487,8 @@
         </div>
     </div>
     <script src="/Assets/Admin/dist/assets/libs/jquery/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="/Assets/Admin/dist/js/jquery.validate.unobtrusive.min.js"></script>
     <script src="/Assets/Admin/dist/assets/bs3/js/bootstrap.min.js"></script>
     <script src="/Assets/Admin/dist/assets/plugins/jquery-navgoco/jquery.navgoco.js"></script>
     <script src="/Assets/Admin/dist/js/main.js"></script>
@@ -507,6 +509,8 @@
     <script src="/Assets/Admin/dist/assets/plugins/morris/morris.min.js"></script>
     <script src="/Assets/Admin/demo/js/dashboard.js"></script>
     <script src="/Assets/Admin/plugins/ckeditor/ckeditor.js"></script>
+    <script src="/Scripts1/jquery-1.10.2.min.js"></script>
+    @RenderSection("scripts", required: false)
     @RenderSection("jsFooter", required: false)
 </body>
 </html>

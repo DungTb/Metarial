@@ -5,60 +5,94 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+@section Header {
+    <table class="table" style="margin-left:20px">
+        <thead>
+            <tr>
+                <th>
+                    <h2 class="header__main">
+                        <span class="breadcrumb"><i class="fa fa-credit-card"></i> </span><span class="title">
+                            Khách Hàng/@foreach (var item in Model)
+                            { @Html.DisplayFor(modelItem => item.Name)
+                                @Html.DisplayFor(modelItem => item.CreatedOn)
+                                break;
+                            }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Number)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PriceItem)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </th>
-        <th></th>
-    </tr>
+                        </span>
+                    </h2>
+                </th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Total)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Number)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PriceItem)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedOn)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+
+            </tr>
+        </thead>
+
+    </table>
 }
+<div class="col-md-8 col-sm-8">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Chi Tiết Đơn Hàng</h4>
+         
+     
+        </div>
+        <div class="panel-body">
+            <table class="table table-condensed text-right">
+                <thead>
+                    <tr>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Đơn Giá</th>
+                        <th width="1"></th>
+                        <th>So luong</th>
+                        <th>Thanh Tien</th>
+                     
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
 
-</table>
+                            <td>@item.ProductName</td>
+                            <td>@item.ProductPrice đ</td>                           
+                            <td width="1">x</td>
+                            <td>@item.Number</td>
+                            <td>@item.PriceItem đ</td>   
+                                                   
+                        </tr>
+                    }
+                </tbody>
+                
+            </table>
+            <div class="row">
+                <div class="col-md-7">
+                </div>
+                <div class="col-md-5">
+                    <table class="table table-condensed text-right">                        
+                        <tbody>                        
+                                <tr>
+                                    <td><h4><b>Gia</b></h4></td>
+                                    <td>
+                                        @foreach (var item in Model)
+                                    { @item.Total
+                                        break;
+                                    }
+                                </td>
+                                </tr>
+                                <tr>
+                                    <td><h4><b>Tổng Cộng</b></h4></td>
+                                    <td>
+                                        @foreach (var item in Model)
+                                    { @item.Total
+                                        break;
+                                    }
+                                </td>
+                                </tr>
+                            
+                        </tbody>
+
+                    </table>
+                </div>
+                </div>
+        </div>
+    </div>
+</div>

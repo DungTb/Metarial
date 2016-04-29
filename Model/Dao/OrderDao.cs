@@ -98,6 +98,28 @@ namespace Model.Dao
               }).Take(quantity);
             return model.ToList();
         }
+        public  string  OrderMode(int customerId) {
+            string total = "_";
+            var order = from a in db.Orders
+                        where a.UserId == customerId
+                        orderby a.CreatedOn descending
+                        select new OrderModel
+                        {
+                            Id = a.Id,
+                            Code = a.Code,                          
+                            PaymetStatus = a.PaymetStatus,
+                            ShippingStatus = a.ShippingStatus,
+                            TotalPrice = a.TotalPrice,
+                            CreatedOn = a.CreatedOn
+                        } ;
+                        OrderModel firstOrder = null;
+                        if (order!= null)
+                        {
+                                firstOrder = order.FirstOrDefault();
+                         }
+            return total= firstOrder.Code;
+
+        }
         public decimal? GetToTal(int customerId)
         {
             decimal? total = 0;
@@ -133,6 +155,7 @@ namespace Model.Dao
                              Name = b.Code,
                              Total = b.TotalPrice,
                              ProductName = a.ProductName,
+                             ProductPrice = a.ProductPrice,
                              Number = a.Number,
                              PriceItem = ((a.ProductPrice) * (a.Number)),
                              

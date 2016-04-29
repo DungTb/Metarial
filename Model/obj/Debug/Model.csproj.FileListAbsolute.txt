@@ -9,5 +9,6 @@ C:\Users\LaiVan\Documents\Visual Studio 2015\Projects\DemoASP\Model\bin\Debug\En
 C:\Users\LaiVan\Documents\Visual Studio 2015\Projects\DemoASP\Model\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\LaiVan\Documents\Visual Studio 2015\Projects\DemoASP\Model\bin\Debug\PagedList.xml
 C:\Users\LaiVan\Documents\Visual Studio 2015\Projects\DemoASP\Model\bin\Debug\PagedList.Mvc.xml
+C:\Users\LaiVan\Documents\Visual Studio 2015\Projects\DemoASP\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
 C:\Users\LaiVan\Documents\Visual Studio 2015\Projects\DemoASP\Model\obj\Debug\Model.dll
 C:\Users\LaiVan\Documents\Visual Studio 2015\Projects\DemoASP\Model\obj\Debug\Model.pdb

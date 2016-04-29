@@ -1,0 +1,65 @@
+﻿@model Model.EF.Customer
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section Header{
+    <table class="table" style="margin-left:20px">
+        <thead>
+            <tr>
+                <th>  <h2 class="header__main"><span class="breadcrumb"><i class="fa fa-credit-card"></i> </span><span class="title"> Khách Hàng/ Thêm Mới</span></h2></th>
+            </tr>
+        </thead>
+    </table>
+}
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    <div class="=row">
+        <div class="col-md-4 col-lg-3">
+            <h4>Thông tin khách hàng</h4>
+            <p class="text-muted">Các thông tin cơ bản về khách hàng.</p>
+        </div>
+        <div class="col-md-8 col-lg-9">                            
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <form role="form">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="exampleInputName6">Tên</label>
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="exampleInputCompany6">Email</label>
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="exampleInputMessage6">Số Điện Thoại</label>
+                                @Html.EditorFor(model => model.Phonenumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Phonenumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="form-group text-right">
+                                <input value="Lưu"  type="submit" class="btn btn-primary" />
+                            </div>
+                        </div>                  
+                    </div>
+                </form>                           
+        </div>
+    </div>
+        }
+
+        
+        
+
+        

@@ -19,6 +19,7 @@ namespace Model.EF
         public int? UserId { get; set; }
 
         [StringLength(50)]
+        [Required(ErrorMessage = "Code is required")]
         public string Code { get; set; }
 
         [StringLength(50)]

@@ -1,14 +1,15 @@
-﻿@model Model.EF.Product
+﻿@model Model.ModelView.ProductModel
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 }
 @section Header{
 <table class="table" style="margin-left:20px">
     <thead>
         <tr>
-            <th>  <h2 class="header__main"><span class="breadcrumb"><i class="fa fa-credit-card"></i> </span><span class="title"> Sản phẩm/ Thêm mới sản phẩm</span></h2></th>
+
             <th>
 
                 <a class="btn btn-default" href="javascript:void(0)" bind-event-click="showExportOrders()">Lưu và thêm mới</a>
@@ -32,7 +33,6 @@
         });
 </script>
 };
-<h2>Create</h2>
 @using (Html.BeginForm())
 {
        @Html.AntiForgeryToken()
@@ -47,13 +47,6 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">Thêm mới sản Phẩm</h4>
-
-
-                        <div class="panel-options">
-                            <a href="#" data-rel="collapse"><i class="fa fa-fw fa-minus"></i></a>
-                            <a href="#" data-rel="reload"><i class="fa fa-fw fa-refresh"></i></a>
-                            <a href="#" data-rel="close"><i class="fa fa-fw fa-times"></i></a>
-                        </div>
                     </div>
                     <div class="panel-body">
                         <form role="form">
@@ -103,7 +96,7 @@
                                     </label>
                                     <div class="form-group">
                                         <div class="controls">
-                                            @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.ListCategories, "Id", "Name"), htmlAttributes: new { @class = "form-control" })
                                             @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -117,14 +110,14 @@
                                     </label>
                                     <div class="form-group">                                       
                                         <div class="controls">
-                                            @Html.DropDownList("ManufacturerId", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.DropDownListFor(model => model.ManufacturerId, new SelectList(Model.ListManufacturers, "Id", "Name"), htmlAttributes: new { @class = "form-control" })
                                             @Html.ValidationMessageFor(model => model.ManufacturerId, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     </div>
                                 </div>
                             <div class="form-group">
-                                <div class="col-md-offset-10 col-md-10">
+                                <div class="col-md-offset-10 col-md-2">
                                     <input type="submit" value="Lưu" class="btn btn-primary" />
                                 </div>
                             </div>                                                      
@@ -133,8 +126,91 @@
             </div>
         </div>
    </div>
+        <div class="row">
+            <div class="col-md-4 col-lg-3">
+                <h4><b>Thêm ảnh cho sản phẩm</b></h4>
+                       
+                <p class="text-muted"> Đăng ảnh cho sản phẩm </p>
+                <input type="hidden" id="ImageIds" value=""/>
+                <input type="file" id="FileUpload" multiple value="Chọn ảnh" /><br />
+                <input type="button" id="btnUpload" value="Đăng ảnh" multiple />
+                <script>
+                        $(document).ready(function () {
+                            $('#btnUpload').click(function () {                            
+                                if (window.FormData !== undefined) {
+                                    var fileUpload = $("#FileUpload").get(0);
+                                    var files = fileUpload.files;                            
+                                    var fileData = new FormData();                              
+                                    for (var i = 0; i < files.length; i++) {
+                                        fileData.append(files[i].name, files[i]);
+                                    }                                  
+                                    fileData.append('username', 'Manas');
+                                    $.ajax({
+                                        url: '/Product/UploadFiles',
+                                        type: "POST",
+                                        contentType: false,
+                                        processData: false, 
+                                        data: fileData,
+                                        success: function (result) {
+                                            var list = result;
+                                            console.log(list);
+                                            var count = 1;
+                                            $.each(list, function (index, item) {                                           
+                                                $('#priview').append('<img'+' id="imgpreview'+count+'"'+' height="200" width="250" src="/Upload/ProductImg/' + item + '" />');
+                                                count++;
+                                            });
+                                        },
+                                        error: function (err) {
+                                            alert(err.statusText);
+                                        }
+                                    });
+                                } else {
+                                    alert("FormData is not supported.");
+                                }
+                            });
+                        });
+                </script>
+            </div>
+            <div class="col-md-8 col-lg-9">
+                <div class="panel panel-default">                   
+                    <div class="panel-body" id="priview">
+                                                             
+                    </div>
+                </div>
+            </div>
+        </div>
+        
    </div>
 }
+@section scripts {
+    <script src="/Scripts1/jquery-ui-1.11.4.min.js"></script>
+    <script src="/Scripts1/jquery.multiuploader.crop.js"></script>
+    <script>
+		$(document).ready(function() {
+			$('#myUploader').imageUploaderCut({
+				proceedCallBack: uploadCallBack
+				});
+function uploadCallBack(jsonString) {
+	$.ajax({
+			url: '/Product/UploadToServer',
+			type: 'POST',
+			dataType: 'json',
+			data: jsonString,
+			contentType: 'application/json; charset=utf-8',
+			success: function(data, event) {
+				//do redirect
+			},
+			error: function (data, event) {
+				//do redirect
+			}
+		});
+	}
+		});
+    </script>
+}
+
+
+
 
 
 

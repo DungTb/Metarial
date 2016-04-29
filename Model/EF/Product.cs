@@ -12,13 +12,17 @@ namespace Model.EF
         public Product()
         {
             ProductCategories = new HashSet<ProductCategory>();
+            ProductImages = new HashSet<ProductImage>();
             OrderDetails = new HashSet<OrderDetail>();
         }
 
         public int Id { get; set; }
 
         [StringLength(50)]
+        [Required(ErrorMessage = "Code is required")]
         public string Code { get; set; }
+
+        public int? GroupProductId { get; set; }
 
         public int? CategoryId { get; set; }
 
@@ -28,6 +32,7 @@ namespace Model.EF
         public string BarCode { get; set; }
 
         [StringLength(50)]
+        [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
         [StringLength(50)]
@@ -54,14 +59,28 @@ namespace Model.EF
         public string Alias { get; set; }
 
         public DateTime? CreatedOn { get; set; }
-        public string Description { get; set; }
-        public string Content1 { get; set; }
+
         public DateTime? ModifiedOn { get; set; }
+
+        [Column(TypeName = "ntext")]
+        [Required(ErrorMessage = "ConTen1 is required")]
+        public string Content1 { get; set; }
+
+        [Column(TypeName = "ntext")]
+        [Required(ErrorMessage = "Description is required")]
+        public string Description { get; set; }
+
+        public virtual Category Category { get; set; }
+
+        public virtual GroupProduct GroupProduct { get; set; }
 
         public virtual Manufacturer Manufacturer { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductCategory> ProductCategories { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductImage> ProductImages { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }

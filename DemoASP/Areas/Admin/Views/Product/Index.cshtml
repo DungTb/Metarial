@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+   
 }
 
 @section Header{
@@ -45,7 +46,7 @@
                 <tbody>
                     @foreach (var item in Model)
             {
-                        <tr>
+                        <tr id="row_@item.Id"> 
                             <td class="select">
                                 <input type="checkbox" bind-event-change="addOrRemoveBulkActionItem(102526,this)" class="bulk-action-item">
                             </td>
@@ -54,16 +55,27 @@
                             <td>@item.NameCategory</td>
                             <td>@item.VendorName</td>
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id })|
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                <a href="" id="Delete">Delete</a>|
+                                @Ajax.ActionLink("Delete", "DeleteConfirmed", new { id = item.Id} ,new AjaxOptions {
+                               Confirm = "Bạn Có Muốn Xóa Không",
+                               OnComplete = "$('#row_" + @item.Id + "').remove()",
+                               HttpMethod = "Delete"
+                           })
+
+
                             </td>
                         </tr>
                     }
 
 
                 </tbody>
+
             </table>
             @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @SearchString = @ViewBag.SearchString1 }))
         </div>
+ 
     </div>
 </div>
 

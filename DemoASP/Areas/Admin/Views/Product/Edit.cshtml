@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 }
 @section jsFooter{
     <script>
@@ -28,14 +29,7 @@
             <div class="col-md-8 col-lg-9">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4 class="panel-title">Sửa Sản Phẩm</h4>
-
-
-                        <div class="panel-options">
-                            <a href="#" data-rel="collapse"><i class="fa fa-fw fa-minus"></i></a>
-                            <a href="#" data-rel="reload"><i class="fa fa-fw fa-refresh"></i></a>
-                            <a href="#" data-rel="close"><i class="fa fa-fw fa-times"></i></a>
-                        </div>
+                        <h4 class="panel-title">Sửa Sản Phẩm</h4>                       
                     </div>
                     <div class="panel-body">
                         <form role="form">
@@ -115,6 +109,59 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-lg-3">
+                <h4>Ảnh</h4>
+                <p class="text-muted">Cung cấp thông tin về tên, mô tả loại sản phẩm và nhà sản xuất để phân loại sản phẩm này.</p>
+            </div>
+            <div class="col-md-8 col-lg-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Thêm ảnh sản Phẩm</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-12 text-right"> 
+                                <span><i>Chọn ảnh đại diện </i></span> <br />
+                                <input type="file" id="UploadImg" /> <br /><br />
+                                Tên mới: <input type="text" id="txtImg" size="50" style="width:140px" /> <br />
+                            </div>                            
+                        </div>
+                        <div class="row">
+                            <div class="">
+                                <img id="imgPreview" class="img-circle" src=@Html.DisplayFor(model => model.Image) height="200" width="200">
+                                <script>
+                            $("#UploadImg").change(function () {
+                                var data = new FormData();
+                                var files = $("#UploadImg").get(0).files;
+                                if (files.length > 0) {
+                                    data.append("MyImages", files[0]);
+                                }
+
+                                $.ajax({
+                                    url: "/Product/UploadFile",
+                                    type: "POST",
+                                    processData: false,
+                                    contentType: false,
+                                    data: data,
+                                    success: function (response) {
+                                        //code after success
+                                        $("#txtImg").val(response);
+                                        $("#imgPreview").attr('src', '/Upload/' + response);
+                                    },
+                                    error: function (er) {
+                                        alert(er);
+                                    }
+
+                                });
+                            });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
         </div>
     </div>
 }

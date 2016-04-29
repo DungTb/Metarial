@@ -89,6 +89,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -205,6 +206,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CustomersController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
@@ -233,6 +235,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Admin\dist\js\jquery.validate.unobtrusive.min.js" />
     <Content Include="Assets\Admin\plugins\ckeditor\adapters - Copy\jquery.js" />
     <Content Include="Assets\Admin\plugins\ckeditor\adapters\jquery.js" />
     <Content Include="Assets\Admin\plugins\ckeditor\build-config - Copy.js" />
@@ -984,13 +987,20 @@
     <Content Include="Assets\Admin\plugins\ckeditor\styles.js" />
     <Content Include="Assets\images\bizweb-logo.png" />
     <Content Include="Assets\images\001.png" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\PagedList.css" />
+    <Content Include="Controllers\Content\bootstrap.css" />
+    <Content Include="Controllers\Content\bootstrap.min.css" />
+    <Content Include="Controllers\Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Controllers\Content\Site.css" />
+    <Content Include="Areas\Admin\Views\Product\Delete.cshtml" />
+    <None Include="Scripts1\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts1\jquery-1.10.2.js" />
+    <Content Include="Scripts1\jquery-1.10.2.min.js" />
+    <Content Include="Scripts1\jquery-ui-1.11.4.js" />
+    <Content Include="Scripts1\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts1\jquery.multiuploader.crop.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1008,7 +1018,6 @@
     <Content Include="Areas\Admin\Views\Category\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Product\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
     <Content Include="Assets\Admin\plugins\ckeditor\CHANGES - Copy.md" />
     <Content Include="Assets\Admin\plugins\ckeditor\CHANGES.md" />
@@ -1050,10 +1059,19 @@
     <Content Include="Areas\Admin\Views\User1\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User1\EditName.cshtml" />
     <Content Include="Areas\Admin\Views\OrderDetial\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\User1\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Index.cshtml" />
+    <Content Include="Scripts1\jquery-1.10.2.min.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -1103,8 +1121,10 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Assets\Admin\demo\" />
-    <Folder Include="Assets\Admin\dist\" />
-    <Folder Include="Upload\" />
+    <Folder Include="Controllers\Content\images\" />
+    <Folder Include="Load\" />
+    <Folder Include="UploadedImages\" />
+    <Folder Include="Upload\ProductImg\" />
     <Folder Include="Views\TaiKhoanController\" />
   </ItemGroup>
   <ItemGroup>
